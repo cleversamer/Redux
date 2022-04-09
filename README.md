@@ -15,6 +15,7 @@ A code implementation for Redux State Management in React in different ways. In 
 - Redux
 - Redux Toolkit
 - React Redux
+- Redux Devtools Extension
 
 ### Installing
 
