@@ -18,11 +18,12 @@ export default function reducer(state = [], action) {
       return state.filter((bug) => bug.id !== action.payload.id);
 
     case actions.BUG_RESOLVED:
-      const index = state.findIndex((bug) => bug.id === action.payload.id);
+      const result = [...state];
+      const index = result.findIndex((bug) => bug.id === action.payload.id);
       if (index >= 0) {
-        state[index].resolved = true;
+        result[index].resolved = true;
       }
-      return state;
+      return result;
 
     default:
       return state;

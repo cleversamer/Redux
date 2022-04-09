@@ -17,11 +17,12 @@ const slice = createSlice({
       bugs.filter((bug) => bug.id !== action.payload.id),
 
     bugResolved: (bugs, action) => {
-      const index = bugs.findIndex((bug) => bug.id === action.payload.id);
+      const result = [...bugs];
+      const index = result.findIndex((bug) => bug.id === action.payload.id);
       if (index >= 0) {
-        bugs[index].resolved = true;
+        result[index].resolved = true;
       }
-      return bugs;
+      return result;
     },
   },
 });
