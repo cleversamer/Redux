@@ -20,14 +20,10 @@ const reducer = createReducer([], {
   [bugRemoved.type]: (bugs, action) =>
     bugs.filter((bug) => bug.id !== action.payload.id),
 
-  [bugResolved.type]: (bugs, action) => {
-    const result = [...bugs];
-    const index = result.findIndex((bug) => bug.id === action.payload.id);
-    if (index >= 0) {
-      result[index].resolved = true;
-    }
-    return result;
-  },
+  [bugResolved.type]: (bugs, action) =>
+    bugs.map((bug) =>
+      bug.id === action.payload.id ? { ...bug, resolved: true } : bug
+    ),
 });
 
 export default reducer;

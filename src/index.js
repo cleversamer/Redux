@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./css/index.css";
 
-// import "./store";
-// import "./customStore";
-// import "./ducks";
-import "./toolkit";
+// import "./store/store";
+// import "./store/customStore";
+// import "./store/ducks";
+import "./store/toolkit";
 
 ReactDOM.render(<App />, document.getElementById("root"));
