@@ -5,6 +5,7 @@ import "./css/index.css";
 
 // import "./store";
 // import "./customStore";
-import "./ducks";
+// import "./ducks";
+import "./toolkit";
 
 ReactDOM.render(<App />, document.getElementById("root"));
