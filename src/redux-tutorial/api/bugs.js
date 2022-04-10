@@ -49,6 +49,7 @@ const slice = createSlice({
   },
 });
 
+// DEV: exported for testing purposes
 export const {
   bugAdded,
   bugRemoved,
@@ -68,14 +69,12 @@ export const loadBugs = () => (dispatch, getState) => {
 
   if (diffInMinutes < 10) return;
 
-  dispatch(
-    apiCallBegan({
-      url,
-      onStart: bugsRequested.type,
-      onSuccess: bugsReceived.type,
-      onError: bugsRequestFailed.type,
-    })
-  );
+  return apiCallBegan({
+    url,
+    onStart: bugsRequested.type,
+    onSuccess: bugsReceived.type,
+    onError: bugsRequestFailed.type,
+  });
 };
 
 export const addBug = (bug) =>

@@ -1,5 +1,5 @@
 import configureStore from "./configureStore";
-import { addBug } from "./bugs";
+import { addBug, loadBugs } from "./bugs";
 
 const store = configureStore();
 
@@ -8,5 +8,7 @@ const unsubscribe = store.subscribe(() => {
 });
 
 store.dispatch(addBug({ description: "A" }));
+
+// store.dispatch(loadBugs());
 
 unsubscribe();
