@@ -3,8 +3,6 @@ import { createSelector } from "reselect";
 import { apiCallBegan } from "./api";
 import moment from "moment";
 
-let lastId = 0;
-
 const slice = createSlice({
   name: "bugs",
   initialState: {
@@ -28,11 +26,7 @@ const slice = createSlice({
     },
 
     bugAdded: (bugs, action) => {
-      bugs.list.push({
-        id: ++lastId,
-        description: action.payload.description,
-        resolved: false,
-      });
+      bugs.list.push(action.payload);
     },
 
     bugRemoved: (bugs, action) =>
@@ -40,15 +34,17 @@ const slice = createSlice({
 
     bugResolved: (bugs, action) => {
       const index = bugs.list.findIndex((bug) => bug.id === action.payload.id);
-      if (index >= 0) bugs.list[index].resolved = true;
-      return bugs;
+      if (index >= 0) {
+        bugs.list[index].resolved = true;
+      }
     },
 
     bugAssignedToUser: (bugs, action) => {
-      const { userId, bugId } = action.payload;
+      const { id: userId, bugId } = action.payload;
       const index = bugs.list.findIndex((bug) => bug.id === bugId);
-      if (index >= 0) bugs.list[index].userId = userId;
-      return bugs;
+      if (index >= 0) {
+        bugs.list[index].userId = userId;
+      }
     },
   },
 });
@@ -65,6 +61,7 @@ export const {
 
 // Action creators
 const url = "/bugs";
+
 export const loadBugs = () => (dispatch, getState) => {
   const { lastFetch } = getState().entities.bugs;
   const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
@@ -81,6 +78,31 @@ export const loadBugs = () => (dispatch, getState) => {
   );
 };
 
+export const addBug = (bug) =>
+  apiCallBegan({
+    url,
+    method: "post",
+    data: bug,
+    onSuccess: bugAdded.type,
+  });
+
+export const resolveBug = (bugId) =>
+  apiCallBegan({
+    url: `${url}/${bugId}`,
+    method: "patch",
+    data: { resolved: true },
+    onSuccess: bugResolved.type,
+  });
+
+export const assignBugToUser = (bugId, userId) =>
+  apiCallBegan({
+    url: `${url}/${bugId}`,
+    method: "patch",
+    data: { userId },
+    onSuccess: bugAssignedToUser.type,
+  });
+
+// Selectors
 export const getUnresolvedBugs = createSelector(
   (state) => state.entities.bugs,
   (bugs) => bugs.list.filter((bug) => !bug.resolved)

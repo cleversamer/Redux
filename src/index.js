@@ -3,11 +3,12 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./css/index.css";
 
-// import "./store/store";
-// import "./store/customStore";
-// import "./store/ducks";
-// import "./store/toolkit";
-// import "./store/middleware";
-import "./store/api";
+// import "./redux-tutorial/store";
+// import "./redux-tutorial/customStore";
+// import "./redux-tutorial/ducks";
+// import "./redux-tutorial/toolkit";
+// import "./redux-tutorial/middleware";
+import "./redux-tutorial/api";
+// import "./store";
 
 ReactDOM.render(<App />, document.getElementById("root"));

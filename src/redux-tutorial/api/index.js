@@ -1,5 +1,5 @@
 import store from "./store";
-import { loadBugs } from "./bugs";
+import { loadBugs, assignBugToUser } from "./bugs";
 
 const unsubscribe = store.subscribe(() => {
   console.log("State has changes!", store.getState());
@@ -7,6 +7,6 @@ const unsubscribe = store.subscribe(() => {
 
 store.dispatch(loadBugs());
 
-setTimeout(() => store.dispatch(loadBugs()), 2000);
+setTimeout(() => store.dispatch(assignBugToUser(1, 4)), 2000);
 
 unsubscribe();
