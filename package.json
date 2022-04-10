@@ -19,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "unit-test": "jest --watch"
   },
   "eslintConfig": {
     "extends": [
@@ -37,5 +38,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@types/jest": "^27.4.1",
+    "axios-mock-adapter": "^1.20.0",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1"
   }
 }

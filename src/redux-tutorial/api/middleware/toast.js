@@ -1,6 +1,6 @@
 const toast = (store) => (next) => (action) => {
   console.log("Toastify:", action.payload?.message);
-  next(action);
+  return next(action);
 };
 
 export default toast;
