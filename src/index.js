@@ -7,6 +7,7 @@ import "./css/index.css";
 // import "./store/customStore";
 // import "./store/ducks";
 // import "./store/toolkit";
-import "./store/middleware";
+// import "./store/middleware";
+import "./store/api";
 
 ReactDOM.render(<App />, document.getElementById("root"));
