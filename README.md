@@ -44,9 +44,7 @@ You need to run both Node server and React app by the following steps:
 
 ## Help
 
-### Issue 1 - Can not fetch data from the server
-
-This application is connected to a fake Node server with static data (that I have created), and you can take a look at it on the `backend` directory. I have definded an action in the store called `loadBugs` that is responsible to fetch the bugs from the server and store it in the global state (which is the store), and when I dispatch this action, nothing happens, also, I don't get notified with this action in `Redux DevTools` extension on my `Chrome browser`.
+- No issues detected yet...
 
 ## Authors
 
