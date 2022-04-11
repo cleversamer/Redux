@@ -1,10 +1,14 @@
-import store from "./store";
-import { loadBugs } from "./bugs";
+import configureStore from "./configureStore";
+import { addBug, loadBugs } from "./bugs";
+
+const store = configureStore();
 
 const unsubscribe = store.subscribe(() => {
-  console.log("State changed!", store.getState());
+  console.log("State has changes!", store.getState());
 });
 
-store.dispatch(loadBugs());
+store.dispatch(addBug({ description: "A" }));
+
+// store.dispatch(loadBugs());
 
 unsubscribe();

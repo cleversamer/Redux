@@ -7,10 +7,7 @@ const slice = createSlice({
   initialState: [],
   reducers: {
     projectAdded: (projects, action) => {
-      projects.push({
-        id: ++lastId,
-        name: action.payload.name,
-      });
+      projects.push({ id: ++lastId, name: action.payload.name });
     },
   },
 });

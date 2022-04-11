@@ -12,10 +12,11 @@ A code implementation for Redux State Management in React in different ways. In 
 
 - React
 - React DOM
-- Redux
-- Redux Toolkit
 - React Redux
+- Redux
 - Redux Devtools Extension
+- Redux Thunk
+- Redux Toolkit
 - Reselect
 
 ### Installing
