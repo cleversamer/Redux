@@ -18,51 +18,30 @@ describe("bugsSlice", () => {
 
   describe("actionCreators", () => {
     describe("loadingBugs", () => {
-      describe("if the bugs exist in the cache", () => {
-        it("they should not be fetched from the server again", async () => {
+      describe("loadingIndicator", () => {
+        it("should return true while fetching the bugs from the server", async () => {
+          fakeAxios.onGet("/bugs").reply(() => {
+            expect(bugsSlice().loading).toBe(true);
+            return [200, [{ id: 1 }]];
+          });
+
+          await store.dispatch(loadBugs());
+        });
+
+        it("should be false after fetching the bugs are fetched from the server", async () => {
           fakeAxios.onGet("/bugs").reply(200, [{ id: 1 }]);
 
           await store.dispatch(loadBugs());
-          await store.dispatch(loadBugs());
 
-          expect(fakeAxios.history.get.length).toBe(1);
+          expect(bugsSlice().loading).toBe(false);
         });
-      });
 
-      describe("if the bugs don't exist in the cache", () => {
-        it("they should be fetched from the server", async () => {
-          fakeAxios.onGet("/bugs").reply(200, [{ id: 1 }]);
+        it("should be false if the server returned an error", async () => {
+          fakeAxios.onGet("/bugs").reply(500);
 
           await store.dispatch(loadBugs());
 
-          expect(bugsSlice().list.length).toBe(1);
-        });
-
-        describe("loadingIndicator", () => {
-          it("should return true while fetching the bugs from the server", async () => {
-            fakeAxios.onGet("/bugs").reply(() => {
-              expect(bugsSlice().loading).toBe(true);
-              return [200, [{ id: 1 }]];
-            });
-
-            await store.dispatch(loadBugs());
-          });
-
-          it("should be false after fetching the bugs are fetched from the server", async () => {
-            fakeAxios.onGet("/bugs").reply(200, [{ id: 1 }]);
-
-            await store.dispatch(loadBugs());
-
-            expect(bugsSlice().loading).toBe(false);
-          });
-
-          it("should be false if the server returned an error", async () => {
-            fakeAxios.onGet("/bugs").reply(500);
-
-            await store.dispatch(loadBugs());
-
-            expect(bugsSlice().loading).toBe(false);
-          });
+          expect(bugsSlice().loading).toBe(false);
         });
       });
     });

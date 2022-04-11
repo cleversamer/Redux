@@ -5,6 +5,7 @@ const api =
   ({ dispatch }) =>
   (next) =>
   async (action) => {
+    console.log("Action:", action.type);
     if (action.type !== actions.apiCallBegan.type) {
       return next(action);
     }
